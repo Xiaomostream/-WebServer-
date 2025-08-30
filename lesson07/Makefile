@@ -1,17 +1,15 @@
-app:sub.o add.o mult.o div.o main.o
-	gcc sub.o add.o mult.o div.o main.o -o app
+#定义变量
+#src=sub.o add.o mult.o div.o main.o
+#在src这个文本字符串里将.c后缀，修改为.o后缀
+src=$(wildcard ./*.c)
+objs=$(patsubst %.c, %.o, $(src))
+target=app
+$(target):$(objs)
+	$(CC) $(objs) -o $(target)
+%.o:%.c
+	$(CC) -c $< -o $@
 
-sub.o:sub.c
-	gcc -c sub.c -o sub.o
-
-add.o:add.c
-	gcc -c add.c -o add.o
-
-mult.o:mult.c
-	gcc -c mult.c -o mult.o
-
-div.o:div.c
-	gcc -c div.c -o div.o
-	
-main.o:main.c
-	gcc -c main.c -o main.o
+#定义clean是一个尾目标。表示clean不需要生成文件
+.PHONY:clean
+clean:
+	rm $(objs) -f

@@ -32,7 +32,7 @@ C.如何定位共享库文件呢？
 对于e1f格式的可执行程序，是由ld-linux.so来完成的。
 它先后搜索elf文件的DT_RPATH段（了解，基本用不到） -> 环境变量LD_LIBRARY_PATH -> /etc/ld.so.cache文件列表 -> /lib/，/usr/lib目录找到库文件后将其载入内存。
 
-     
+    
 
 
 
